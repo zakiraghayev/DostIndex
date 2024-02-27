@@ -1,9 +1,43 @@
 version: "3.8"
 
 services:
+  pgdb:
+    image: postgres
+    restart: "always"
+    container_name: dost-index-database
+    env_file: .env
+    volumes:
+      - ./volumes/pgdata:/var/lib/postgresql/data/
+
+  redis:
+    image: "redis:alpine"
+    container_name: dost-index-redis
+    restart: "always"
+    env_file: .env
+    command: ["sh", "-c", "exec redis-server --requirepass \"$REDIS_PASSWORD\""]
+    volumes:
+      - ./volumes/redisdb:/var/lib/redis
+
+  celery:
+    build:
+      context: .
+      dockerfile: celery.dockerfile
+    restart: "always"
+    container_name: dost-index-celery
+    command: celery --app=apps.todo.config.celery:app worker -E --beat --scheduler django --loglevel=info
+    volumes:
+      - .:/usr/src/app
+    env_file: .env
+    depends_on:
+      - pgdb
+      - redis
+
   django:
-    build: .
-    container_name: django
+    build:
+      context: .
+      dockerfile: django.dockerfile
+    container_name: dost-index-web
+    restart: "always"
     command: >
       bash -c "python manage.py makemigrations &&
                   python manage.py migrate &&
@@ -16,27 +50,16 @@ services:
     depends_on:
       - pgdb
       - redis
-
-  celery:
-    build: .
-    command: celery -A dost_index worker -l INFO
-    volumes:
-      - .:/usr/src/app
-    env_file: .env
-    depends_on:
-      - django
+      - celery
+    links:
+      - pgdb
       - redis
+      - celery
 
-  pgdb:
-    image: postgres
-    container_name: pgdb
-    env_file: .env
-
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
-
-  redis:
-    image: "redis:alpine"
-
+  
+  
 volumes:
   pgdata:
+  celery:
+  django:
+  redis:

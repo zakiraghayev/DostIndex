@@ -17,6 +17,9 @@ app = Celery('dost_index')
 # Load configuration from Django settings
 app.config_from_object(settings)
 
+# Celery broker
+app.conf.broker_connection_retry_on_startup = True
+
 # Auto-discover tasks from all installed Django apps
 app.autodiscover_tasks(lambda: [n.name for n in apps.get_app_configs()])
 
