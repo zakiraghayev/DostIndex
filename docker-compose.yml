@@ -40,6 +40,7 @@ services:
     restart: "always"
     command: >
       bash -c "python manage.py makemigrations &&
+                  python manage.py makemigrations user &&
                   python manage.py makemigrations assessment &&
                   python manage.py migrate &&
                   python manage.py runserver 0.0.0.0:8000"
@@ -47,6 +48,7 @@ services:
       - ./volumes/django/media:/usr/src/app/media
       - ./volumes/django/static:/usr/src/app/static
       - ./apps/assessment/migrations:/usr/src/app/apps/assessment/migrations
+      - ./apps/user/migrations:/usr/src/app/apps/user/migrations
 
     ports:
       - "8000:8000"

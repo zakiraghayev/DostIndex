@@ -1,1 +1,1 @@
-default_app_config = 'apps.todo.apps.ToDoConfig'
+default_app_config = 'apps.user.apps.UserConfig'

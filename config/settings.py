@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     # apps
     'apps.todo.apps.ToDoConfig',
     'apps.assessment.apps.AssessmentConfig',
-
+    'apps.user.apps.UserConfig',
     # 3rd party libs
     'django_celery_beat',
 ]
@@ -138,4 +138,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth Field
-AUTH_USER_MODEL = "apps.user.User"
+AUTH_USER_MODEL = "user.User"
