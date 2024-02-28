@@ -3,3 +3,4 @@ psycopg2-binary
 celery
 redis
 django-celery-beat
+django-jazzmin==2.6.0
