@@ -13,22 +13,22 @@ class Command(BaseCommand):
         # List of staff users to create
         # Each tuple in the format: (email, password, group_name)
         staff_users = [
-            (
+            [
                 os.environ.get(f"STAFF_USER_{i}_EMAIL"),
                 os.environ.get(f"STAFF_USER_{i}_PASSWORD"),
                 'Managers'
-            )
+            ]
 
             for i in range(1, 10)
             if os.environ.get(f"STAFF_USER_{i}_EMAIL", False)
         ]
 
-        staff_users.extend(
-            (
+        staff_users.append(
+            [
                 os.environ.get("SUPER_USER_EMAIL"),
                 os.environ.get("SUPER_USER_PASSWORD"),
                 'SuperAdmin'
-            )
+            ]
         )
 
         for email, password, group_name in staff_users:
@@ -39,13 +39,22 @@ class Command(BaseCommand):
         # Create user if they don't already exist
         if not User.objects.filter(email=email).exists():
             user = User.objects.create_user(
-                email=email, password=password, is_staff=True)
-            self.stdout.write(self.style.SUCCESS(
-                f'Successfully created staff user: {email}'))
+                email=email,
+                password=password,
+                is_staff=True
+            )
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f'Successfully created staff user: {email}\n'
+                )
+            )
         else:
             user = User.objects.get(email=email)
-            self.stdout.write(self.style.SUCCESS(
-                f'Staff user already exists: {email}'))
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Staff user already exists: {email}\n'
+                )
+            )
 
         # Assign the user to the specified group
         self.assign_user_to_group(user, group_name)
@@ -61,14 +70,21 @@ class Command(BaseCommand):
 
             if user not in group.user_set.all():
                 group.user_set.add(user)
-                self.stdout.write(self.style.SUCCESS(
-                    f'Successfully added {user.email} to {group_name} group'))
+                self.stdout.write(
+                    self.style.SUCCESS(
+                        f"""Successfully added {
+                            user.email} to {group_name} group\n"""
+                    )
+                )
             else:
-                self.stdout.write(self.style.SUCCESS(
-                    f'User {user.email} is already in {group_name} group'))
+                self.stdout.write(
+                    self.style.WARNING(
+                        f'User {user.email} is already in {group_name} group\n'
+                    )
+                )
         except Group.DoesNotExist:
             self.stdout.write(
                 self.style.ERROR(
-                    f"No group found with name of {group_name}"
+                    f"No group found with name of {group_name}\n"
                 )
             )
