@@ -7,7 +7,7 @@ class Article(DateTimeModel, models.Model):
 
     title = models.CharField(
         verbose_name="Blok adı",
-        max_length="64",
+        max_length=64,
         default="Liderlik."
     )
 
@@ -16,12 +16,12 @@ class Section(DateTimeModel, models.Model):
 
     code = models.CharField(
         verbose_name="Kod nömrəsi",
-        max_length="5",
+        max_length=5,
         default="1"
     )
     title = models.CharField(
         verbose_name="Göstərici - KPİ adı",
-        max_length="64",
+        max_length=64,
         default="Hədəfə çatma"
     )
     maximum = models.PositiveIntegerField(

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # apps
     'apps.todo.apps.ToDoConfig',
     'apps.assessment.apps.AssessmentConfig',
+
     # 3rd party libs
     'django_celery_beat',
 ]
