@@ -40,9 +40,8 @@ services:
     restart: "always"
     command: >
       bash -c "python manage.py makemigrations &&
-                  python manage.py makemigrations user &&
-                  python manage.py makemigrations assessment &&
                   python manage.py migrate &&
+                  python manage.py populate &&
                   python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./volumes/django/media:/usr/src/app/media
