@@ -4,12 +4,19 @@ from apps.commons.models import DateTimeModel
 
 
 class Article(DateTimeModel, models.Model):
-
+    code = models.CharField(
+        verbose_name="Kod nömrəsi",
+        max_length=5,
+        default="1"
+    )
     title = models.CharField(
         verbose_name="Blok adı",
         max_length=64,
         default="Liderlik."
     )
+
+    def __str__(self) -> str:
+        return f"{self.code}. {self.title}"
 
 
 class Section(DateTimeModel, models.Model):
@@ -51,3 +58,6 @@ class Section(DateTimeModel, models.Model):
         null=True,
         related_name="sections"
     )
+
+    def __str__(self) -> str:
+        return f"{self.article.code}.{self.code}.{self.title}"

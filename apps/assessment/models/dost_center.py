@@ -11,3 +11,6 @@ class DostCenter(DateTimeModel, models.Model):
         max_length=128,
         default="DOST Mərkəzi #1"
     )
+
+    def __str__(self) -> str:
+        return self.name
