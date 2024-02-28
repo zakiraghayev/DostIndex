@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
     # apps
     'apps.todo.apps.ToDoConfig',
-
+    'apps.assessment.apps.AssessmentConfig',
+    'apps.user.apps.UserConfig',
     # 3rd party libs
     'django_celery_beat',
 ]
@@ -95,7 +96,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -136,3 +136,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Auth Field
+AUTH_USER_MODEL = "user.User"
