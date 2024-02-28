@@ -27,6 +27,9 @@ class Assessment(DateTimeModel, models.Model):
                 timezone.now() + timezone.timedelta(days=90)).date()
         super().save(*args, **kwargs)
 
+    def __str__(self) -> str:
+        return f"{self.center}:  {self.period_start}/{self.period_end}"
+
 
 class AssessmentPoint(DateTimeModel, models.Model):
     section = models.ForeignKey(
@@ -48,3 +51,6 @@ class AssessmentPoint(DateTimeModel, models.Model):
         default=0,
         validators=[MaxValueValidator(limit_value=100)]
     )
+
+    def __str__(self) -> str:
+        return f"{self.section.article.code}. {self.section.article.title}"
