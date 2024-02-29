@@ -20,6 +20,10 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS('Populating staff users...\n'))
         call_command('populate_staff_users')
 
+        # Call populate_staff_users command
+        self.stdout.write(self.style.SUCCESS('Populating articles & sections'))
+        call_command('populate_articles_and_sections')
+
         self.stdout.write(
             self.style.SUCCESS(
                 'Database population complete.\n'

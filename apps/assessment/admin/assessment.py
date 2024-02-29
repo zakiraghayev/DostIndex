@@ -28,7 +28,7 @@ class AssessmentPointInlineFormset(BaseInlineFormSet):
         if not self.instance.pk:  # Check if this is a new object
             # Get all sections grouped by article
             sections_grouped_by_article = Section.objects.order_by(
-                'article__title', 'code'
+                'article__code', 'code'
             )
             self.initial = [
                 {'section': section}
