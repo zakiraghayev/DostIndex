@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+from config.admin_settings import JAZZMIN_SETTINGS
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,6 +132,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ("az", "Azerbaijan"),
+    ("en", "English"),
+
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -143,3 +150,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Auth Field
 AUTH_USER_MODEL = "user.User"
+
+# Import Admin settings
+JAZZMIN_SETTINGS
