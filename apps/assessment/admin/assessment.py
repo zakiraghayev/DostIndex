@@ -1,3 +1,4 @@
+from typing import Any
 from django.contrib import admin
 from django.forms.models import BaseInlineFormSet
 from django import forms
@@ -5,7 +6,6 @@ from django import forms
 from apps.assessment.models import Assessment
 from apps.assessment.models import AssessmentPoint
 from apps.assessment.models import Section
-from apps.assessment.models import Article
 
 
 class AssessmentPointForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class AssessmentPointInlineFormset(BaseInlineFormSet):
         if not self.instance.pk:  # Check if this is a new object
             # Get all sections grouped by article
             sections_grouped_by_article = Section.objects.order_by(
-                'article__title', 'code'
+                'article__code', 'code'
             )
             self.initial = [
                 {'section': section}
@@ -42,15 +42,46 @@ class AssessmentPointInline(admin.TabularInline):
     formset = AssessmentPointInlineFormset
     form = AssessmentPointForm
     extra = 0  # We will dynamically set this in the formset
+    can_delete = False
 
     def get_formset(self, request, obj=None, **kwargs):
         formset_class = super().get_formset(request, obj, **kwargs)
-        formset_class.can_delete = False  # Ensure "Delete" is always disabled
         return formset_class
 
 
 class AssessmentAdmin(admin.ModelAdmin):
     inlines = [AssessmentPointInline]
+
+    class Media:
+        js = ('admin/disable_remove.js', )
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+
+        # Saving new and changed instances
+        for instance in instances:
+            instance.save()
+
+        formset.save_m2m()  # Save many-to-many relationships if needed
+
+        # Call the custom method to handle missing AssessmentPoints
+        if formset.model == AssessmentPoint:
+            self.add_missing_assessment_points(form.instance)
+
+        super().save_formset(request, form, formset, change)
+
+    def add_missing_assessment_points(self, assessment):
+        """Add AssessmentPoint instances for missing sections."""
+        all_sections = Section.objects.all()
+        existing_section_ids = assessment.points.values_list(
+            'section_id', flat=True)
+        missing_sections = all_sections.exclude(id__in=existing_section_ids)
+
+        # Create AssessmentPoint instances for missing sections
+        AssessmentPoint.objects.bulk_create([
+            AssessmentPoint(section=section, assessment=assessment, value=0)
+            for section in missing_sections
+        ])
 
 
 admin.site.register(Assessment, AssessmentAdmin)
