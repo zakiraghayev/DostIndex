@@ -1,4 +1,5 @@
 from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils import timezone
 from apps.assessment.models import DostCenter
@@ -49,7 +50,10 @@ class AssessmentPoint(DateTimeModel, models.Model):
     value = models.FloatField(
         verbose_name="Göstərici dəyəri",
         default=0,
-        validators=[MaxValueValidator(limit_value=100)]
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
     )
 
     def __str__(self) -> str:
