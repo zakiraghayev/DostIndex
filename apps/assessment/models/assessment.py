@@ -10,8 +10,18 @@ from apps.commons.models import DateTimeModel
 
 class Assessment(DateTimeModel, models.Model):
 
-    period_start = models.DateField()
-    period_end = models.DateField()
+    QUARTERS = (
+        ("1", "I Rüb"),
+        ("2", "II Rüb"),
+        ("3", "III Rüb"),
+        ("4", "IV Rüb"),
+    )
+
+    quarter = models.CharField(
+        choices=QUARTERS,
+        max_length=16,
+        default="1"
+    )
 
     center = models.ForeignKey(
         DostCenter,
@@ -30,6 +40,15 @@ class Assessment(DateTimeModel, models.Model):
 
     def __str__(self) -> str:
         return f"{self.center}:  {self.period_start}/{self.period_end}"
+
+    @property
+    def quarter_str(self):
+        {
+            "1": "I Rüb",
+            "2": "II Rüb",
+            "3": "III Rüb",
+            "4": "IV Rüb",
+        }[self.quarter]
 
 
 class AssessmentPoint(DateTimeModel, models.Model):

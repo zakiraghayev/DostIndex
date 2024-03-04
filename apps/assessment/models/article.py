@@ -136,3 +136,7 @@ class Section(DateTimeModel, models.Model):
             "formula_max_min_max": self.formula_max_min_max,
         }
         return formulas[self.formula](Aij=Aij)
+
+    @property
+    def number(self):
+        return f"{self.article.code}.{self.code}"

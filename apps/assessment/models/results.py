@@ -2,16 +2,24 @@ from django.db import models
 
 
 class DostKPIResult(models.Model):
-    period_year = models.FloatField(
-        default=0,
+
+    dost_center = models.CharField(
+        default="Dost Mərkəzi #1",
+        help_text="Dost mərkəzinin adı",
+        max_length=64
+    )
+
+    period_year = models.PositiveIntegerField(
+        default=2024,
         help_text="Dövr il",
         verbose_name="Year of the Period"
     )
-    period_quarter = models.FloatField(
-        default=0,
+    period_quarter = models.CharField(
+        default="I rüb",
         help_text="Dövr rüb",
         verbose_name="Quarter of the Period"
     )
+
     target_achievement = models.FloatField(
         default=0,
         help_text="1.1. Hədəfə çatma",
@@ -122,3 +130,6 @@ class DostKPIResult(models.Model):
         help_text="4.4. SA qiymətləndirilməsi",
         verbose_name="SA Assessment"
     )
+
+    class Meta:
+        unique_together = ["dost_center", "period_year", "period_quarter"]
