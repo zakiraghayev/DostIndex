@@ -30,20 +30,15 @@ class Assessment(DateTimeModel, models.Model):
         related_name="assessments"
     )
 
-    def save(self, *args, **kwargs):
-        if not self.period_start:
-            self.period_start = timezone.now().date()
-        if not self.period_end:
-            self.period_end = (
-                timezone.now() + timezone.timedelta(days=90)).date()
-        super().save(*args, **kwargs)
+    class Meta:
+        unique_together = ["quarter", "center"]
 
     def __str__(self) -> str:
-        return f"{self.center}:  {self.period_start}/{self.period_end}"
+        return f"{self.center}:  {self.quarter_str}"
 
     @property
     def quarter_str(self):
-        {
+        return {
             "1": "I Rüb",
             "2": "II Rüb",
             "3": "III Rüb",

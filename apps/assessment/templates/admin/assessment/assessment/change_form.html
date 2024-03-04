@@ -1,0 +1,9 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block submit_buttons_bottom %}
+{{ block.super }}
+<br>
+<input type="submit" name="_approve_and_calculate" value="{% trans 'Təsdiqlə və Hesabla' %}" class="btn btn-success form-control" />
+
+{% endblock %}

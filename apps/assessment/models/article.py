@@ -48,7 +48,7 @@ class Section(DateTimeModel, models.Model):
     )
     maximum = models.FloatField(
         help_text="Aj üçün mümkün yuxarı sərhədd",
-        default=0,
+        default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
@@ -57,7 +57,7 @@ class Section(DateTimeModel, models.Model):
 
     minimum = models.FloatField(
         help_text="Aj üçün mümkün aşağı sərhədd",
-        default=0,
+        default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
@@ -65,7 +65,7 @@ class Section(DateTimeModel, models.Model):
     )
 
     Aij_minimum = models.FloatField(
-        default=0,
+        default=1,
         help_text="Məlumatın hesablanması üçün lazım olan minimum dəyər",
         validators=[
             MaxValueValidator(limit_value=100),
@@ -75,7 +75,7 @@ class Section(DateTimeModel, models.Model):
 
     Aij_maximum = models.FloatField(
         help_text="Məlumatın hesablanması üçün lazım olan max dəyər",
-        default=0,
+        default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
@@ -92,7 +92,7 @@ class Section(DateTimeModel, models.Model):
 
     coefficient = models.FloatField(
         help_text="Əmsal",
-        default=0,
+        default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
@@ -101,7 +101,7 @@ class Section(DateTimeModel, models.Model):
 
     sub_points = models.FloatField(
         help_text="Altmeyarlar üzrə maksimum bal",
-        default=0,
+        default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)

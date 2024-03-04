@@ -2,10 +2,12 @@ from typing import Any
 from django.contrib import admin
 from django.forms.models import BaseInlineFormSet
 from django import forms
+from django.http import HttpResponseRedirect
 
 from apps.assessment.models import Assessment
 from apps.assessment.models import AssessmentPoint
 from apps.assessment.models import Section
+from apps.todo.tasks import calculate_kpi_task
 
 
 class AssessmentPointForm(forms.ModelForm):
@@ -82,6 +84,19 @@ class AssessmentAdmin(admin.ModelAdmin):
             AssessmentPoint(section=section, assessment=assessment, value=0)
             for section in missing_sections
         ])
+
+    def response_change(self, request, obj):
+        if "_approve_and_calculate" in request.POST:
+            # Handle approve logic here
+            calculate_kpi_task.delay(obj.id)
+
+            self.message_user(
+                request,
+                "Uğurla təsdiqlənildi. Qısa zaman ərzində hesablama bitəcək. Nəticəni 'DostKPIResult' bölməsindən izləyə bilərsiniz."
+            )
+            return HttpResponseRedirect(".")
+
+        return super().response_change(request, obj)
 
 
 admin.site.register(Assessment, AssessmentAdmin)

@@ -2,7 +2,7 @@ from typing import List
 from apps.assessment.models import Assessment
 from apps.assessment.models import AssessmentPoint
 from apps.assessment.models import DostKPIResult
-from celery import shared_task
+from apps.todo.config.celery import app
 
 
 class CalculateKPI:
@@ -10,15 +10,14 @@ class CalculateKPI:
         self.assessment = assessment
 
     def run(self):
-        points: List[AssessmentPoint] = self.assessment.points
+        points: List[AssessmentPoint] = self.assessment.points.all()
         fields_mapping = self.code_to_field_mapping()
 
-        fields_with_data = {
-            fields_mapping[point.section.number]: point.section.calculate(
-                point.value
-            )
-            for point in points
-        }
+        fields_with_data = {}
+
+        for point in points:
+            key = fields_mapping[point.section.number]
+            fields_with_data[key] = point.section.calculate(point.value)
 
         fields_with_data["period_year"] = self.assessment
         fields_with_data["period_quarter"] = self.assessment.quarter_str
@@ -57,7 +56,8 @@ class CalculateKPI:
         }
 
 
-@shared_task
-def calculate_kpi_task(assessment: Assessment):
+@app.task()
+def calculate_kpi_task(assessment_id: int):
+    assessment = Assessment.objects.get(id=assessment_id)
     task_instance = CalculateKPI(assessment)
     return task_instance.run()
