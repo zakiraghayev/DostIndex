@@ -11,6 +11,7 @@ article_1 = {
             'maximum': 100,
             'coefficient': 3,
             'sub_points': 30,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 2,
@@ -19,6 +20,7 @@ article_1 = {
             'maximum': 20,
             'coefficient': 3,
             'sub_points': 20,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 3,
@@ -27,6 +29,7 @@ article_1 = {
             'maximum': 100,
             'coefficient': 3,
             'sub_points': 20,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 4,
@@ -35,6 +38,7 @@ article_1 = {
             'maximum': 100,
             'coefficient': 3,
             'sub_points': 15,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 5,
@@ -43,6 +47,7 @@ article_1 = {
             'maximum': 5,
             'coefficient': 3,
             'sub_points': 15,
+            'formula': 'formula_max_min_max',
         },
     ]
 }
@@ -58,6 +63,7 @@ article_2 = {
             'maximum': 100,
             'coefficient': 2.5,
             'sub_points': 20,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 2,
@@ -66,6 +72,7 @@ article_2 = {
             'maximum': 5.01,
             'coefficient': 2.5,
             'sub_points': 10,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 3,
@@ -74,6 +81,7 @@ article_2 = {
             'maximum': 15.01,
             'coefficient': 2.5,
             'sub_points': 15,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 4,
@@ -82,6 +90,7 @@ article_2 = {
             'maximum': 100,
             'coefficient': 2.5,
             'sub_points': 10,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 5,
@@ -90,6 +99,7 @@ article_2 = {
             'maximum': 5,
             'coefficient': 2.5,
             'sub_points': 15,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 6,
@@ -98,6 +108,7 @@ article_2 = {
             'maximum': 5,
             'coefficient': 2.5,
             'sub_points': 15,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 7,
@@ -106,6 +117,7 @@ article_2 = {
             'maximum': 5,
             'coefficient': 2.5,
             'sub_points': 15,
+            'formula': 'formula_min_max_min',
         },
 
     ]
@@ -122,6 +134,7 @@ article_3 = {
             'maximum': 100,
             'coefficient': 2.5,
             'sub_points': 25,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 2,
@@ -130,6 +143,7 @@ article_3 = {
             'maximum': 5.01,
             'coefficient': 2.5,
             'sub_points': 20,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 3,
@@ -138,6 +152,7 @@ article_3 = {
             'maximum': 15.01,
             'coefficient': 2.5,
             'sub_points': 20,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 4,
@@ -146,6 +161,7 @@ article_3 = {
             'maximum': 100,
             'coefficient': 2.5,
             'sub_points': 10,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 5,
@@ -154,6 +170,7 @@ article_3 = {
             'maximum': 5,
             'coefficient': 2.5,
             'sub_points': 10,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 6,
@@ -162,6 +179,7 @@ article_3 = {
             'maximum': 5,
             'coefficient': 2.5,
             'sub_points': 15,
+            'formula': 'formula_max_min_max',
         }
 
     ]
@@ -178,6 +196,7 @@ article_4 = {
             'maximum': 100,
             'coefficient': 2,
             'sub_points': 20,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 2,
@@ -186,6 +205,7 @@ article_4 = {
             'maximum': 5.01,
             'coefficient': 2,
             'sub_points': 30,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 3,
@@ -194,6 +214,7 @@ article_4 = {
             'maximum': 100,
             'coefficient': 2,
             'sub_points': 25,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 4,
@@ -202,6 +223,7 @@ article_4 = {
             'maximum': 5,
             'coefficient': 2,
             'sub_points': 25,
+            'formula': 'formula_min_max_min',
         },
 
 
@@ -219,6 +241,7 @@ article_5 = {
             'maximum': 100,
             'coefficient': 10,
             'sub_points': 30,
+            'formula': 'formula_min_max_min',
         },
         {
             'code': 2,
@@ -227,6 +250,7 @@ article_5 = {
             'maximum': 5.01,
             'coefficient': 10,
             'sub_points': 25,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 3,
@@ -235,6 +259,7 @@ article_5 = {
             'maximum': 15.01,
             'coefficient': 10,
             'sub_points': 20,
+            'formula': 'formula_max_min_max',
         },
         {
             'code': 4,
@@ -243,6 +268,7 @@ article_5 = {
             'maximum': 100,
             'coefficient': 10,
             'sub_points': 25,
+            'formula': 'formula_min_max_min',
         },
     ]
 }

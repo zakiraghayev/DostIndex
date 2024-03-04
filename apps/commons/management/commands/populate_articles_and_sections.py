@@ -7,8 +7,15 @@ from apps.commons.management.data.article_and_sections import blocks_with_sectio
 class Command(BaseCommand):
     help = 'Creates necessary articles and sections in the database.'
 
-    def handle(self, *args, **kwargs):
+    def add_arguments(self, parser):
+        # Adding a boolean argument
+        parser.add_argument(
+            '--dry-run',
+            action='store_true',
+            help='Run the command in dry run mode without making any changes.',
+        )
 
+    def handle(self, *args, **kwargs):
         for block in blocks_with_sections:
             article, created = Article.objects.get_or_create(
                 code=block['code'],
@@ -30,7 +37,6 @@ class Command(BaseCommand):
                 )
 
             self.stdout.write("\n")
-
             for section_data in block['sections']:
                 self.create_section(section_data=section_data, article=article)
 
@@ -39,12 +45,7 @@ class Command(BaseCommand):
             title=section_data['title'],
             code=section_data['code'],
             article=article,
-            defaults={
-                'minimum': section_data['minimum'],
-                'maximum': section_data['maximum'],
-                'coefficient': section_data['coefficient'],
-                'sub_points': section_data['sub_points'],
-            }
+            defaults=section_data
         )
 
         if created:

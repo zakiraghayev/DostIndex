@@ -23,6 +23,19 @@ class Article(DateTimeModel, models.Model):
 
 class Section(DateTimeModel, models.Model):
 
+    FORMULAS = (
+        (
+            "formula_min_max_min",  # formula function name below
+            "Əmsal * Altmeyar * (Aij - Ajmin)/(Ajmax - Ajmin)"
+        ),
+
+        (
+
+            "formula_max_min_max",  # formula function name below
+            "Əmsal * Altmeyar * (Aij - Ajmax)/(Ajmin - Ajmax)"
+        )
+    )
+
     code = models.CharField(
         verbose_name="Kod nömrəsi",
         max_length=5,
@@ -95,5 +108,31 @@ class Section(DateTimeModel, models.Model):
         ]
     )
 
+    formula = models.CharField(
+        choices=FORMULAS,
+        null=True
+    )
+
     def __str__(self) -> str:
         return f"{self.article.code}.{self.code}.{self.title}"
+
+    def formula_min_max_min(self, Aij: float = 0) -> float:
+        coefficient = self.sub_points * self.coefficient
+        formula = (Aij - self.Aij_minimum) / \
+            (self.Aij_maximum - self.Aij_minimum)
+
+        return coefficient * formula
+
+    def formula_max_min_max(self, Aij: float = 0) -> float:
+        coefficient = self.sub_points * self.coefficient
+        formula = (Aij - self.Aij_maximum) / \
+            (self.Aij_minimum - self.Aij_maximum)
+
+        return coefficient * formula
+
+    def calculate(self, Aij: float = 0) -> float:
+        formulas = {
+            "formula_min_max_min": self.formula_min_max_min,
+            "formula_max_min_max": self.formula_max_min_max,
+        }
+        return formulas[self.formula](Aij=Aij)
