@@ -8,31 +8,41 @@ article_1 = {
             'code': 1,
             'title': 'Hədəfə çatma',
             'minimum': 60,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 3,
+            'sub_points': 30,
         },
         {
             'code': 2,
             'title': 'İnzibati qayda pozuntuları',
             'minimum': 0,
             'maximum': 20,
+            'coefficient': 3,
+            'sub_points': 20,
         },
         {
             'code': 3,
             'title': 'İşçilərin rəhblərdən məmnunluğu',
             'minimum': 60,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 3,
+            'sub_points': 20,
         },
         {
             'code': 4,
             'title': 'Vətəndaş qəbulu',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 3,
+            'sub_points': 15,
         },
         {
             'code': 5,
             'title': 'Korporativ mədəniyyət',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 3,
+            'sub_points': 15,
         },
     ]
 }
@@ -45,43 +55,57 @@ article_2 = {
             'code': 1,
             'title': 'Vətəndaş məmnunluğu',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2.5,
+            'sub_points': 20,
         },
         {
             'code': 2,
             'title': 'Orta gözləmə müddəti',
             'minimum': 0.1,
             'maximum': 5.01,
+            'coefficient': 2.5,
+            'sub_points': 10,
         },
         {
             'code': 3,
             'title': 'Orta xidmət müddəti',
             'minimum': 0.1,
-            'maximum': 15.01
+            'maximum': 15.01,
+            'coefficient': 2.5,
+            'sub_points': 15,
         },
         {
             'code': 4,
             'title': 'ESSX-dən məmnunluq',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2.5,
+            'sub_points': 10,
         },
         {
             'code': 5,
             'title': 'Əsaslı şikayətlər',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2.5,
+            'sub_points': 15,
         },
         {
             'code': 6,
             'title': 'Cavablandırılan şikayətlər',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2.5,
+            'sub_points': 15,
         },
         {
             'code': 7,
             'title': 'Yerində cavablandırma',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2.5,
+            'sub_points': 15,
         },
 
     ]
@@ -95,37 +119,49 @@ article_3 = {
             'code': 1,
             'title': 'ÜDSY üzrə gecikmə',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2.5,
+            'sub_points': 25,
         },
         {
             'code': 2,
             'title': 'Təkrar müraciət',
             'minimum': 0.1,
             'maximum': 5.01,
+            'coefficient': 2.5,
+            'sub_points': 20,
         },
         {
             'code': 3,
             'title': 'Arxa ofis imtinaları',
             'minimum': 0.1,
-            'maximum': 15.01
+            'maximum': 15.01,
+            'coefficient': 2.5,
+            'sub_points': 20,
         },
         {
             'code': 4,
             'title': 'Gecikdirilmiş sənədlər',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2.5,
+            'sub_points': 10,
         },
         {
             'code': 5,
             'title': 'Könüllülərdən məmnunluq',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2.5,
+            'sub_points': 10,
         },
         {
             'code': 6,
             'title': 'Riskə dayanıqlılıq',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2.5,
+            'sub_points': 15,
         }
 
     ]
@@ -139,25 +175,33 @@ article_4 = {
             'code': 1,
             'title': 'İşçi dövriyyəsi',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2,
+            'sub_points': 20,
         },
         {
             'code': 2,
             'title': 'İşçilərin məmnunluğu',
             'minimum': 0.1,
             'maximum': 5.01,
+            'coefficient': 2,
+            'sub_points': 30,
         },
         {
             'code': 3,
             'title': 'İmtahan nəticələri',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 2,
+            'sub_points': 25,
         },
         {
             'code': 4,
             'title': 'SA qiymətləndirilməsi',
             'minimum': 0,
-            'maximum': 5
+            'maximum': 5,
+            'coefficient': 2,
+            'sub_points': 25,
         },
 
 
@@ -172,29 +216,34 @@ article_5 = {
             'code': 1,
             'title': 'Tələblərə görə icra',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 10,
+            'sub_points': 30,
         },
         {
             'code': 2,
             'title': 'İT infrastruktur',
             'minimum': 0.1,
             'maximum': 5.01,
+            'coefficient': 10,
+            'sub_points': 25,
         },
         {
             'code': 3,
             'title': 'Kommunikasiya',
             'minimum': 0.1,
-            'maximum': 15.01
+            'maximum': 15.01,
+            'coefficient': 10,
+            'sub_points': 20,
         },
         {
             'code': 4,
             'title': 'Arxa ofislərdən məmnunluq',
             'minimum': 95,
-            'maximum': 100
+            'maximum': 100,
+            'coefficient': 10,
+            'sub_points': 25,
         },
-
-
-
     ]
 }
 

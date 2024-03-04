@@ -42,6 +42,8 @@ class Command(BaseCommand):
             defaults={
                 'minimum': section_data['minimum'],
                 'maximum': section_data['maximum'],
+                'coefficient': section_data['coefficient'],
+                'sub_points': section_data['sub_points'],
             }
         )
 

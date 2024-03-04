@@ -1,3 +1,5 @@
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
 from django.db import models
 
 from apps.commons.models import DateTimeModel
@@ -31,24 +33,40 @@ class Section(DateTimeModel, models.Model):
         max_length=64,
         default="Hədəfə çatma"
     )
-    maximum = models.PositiveIntegerField(
+    maximum = models.FloatField(
         help_text="Aj üçün mümkün yuxarı sərhədd",
-        default=100,
-    )
-
-    minimum = models.PositiveIntegerField(
-        help_text="Aj üçün mümkün aşağı sərhədd",
-        default=0
-    )
-
-    Aij_minimum = models.PositiveIntegerField(
         default=0,
-        help_text="Məlumatın hesablanması üçün lazım olan minimum dəyər"
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
     )
 
-    Aij_maximum = models.PositiveIntegerField(
+    minimum = models.FloatField(
+        help_text="Aj üçün mümkün aşağı sərhədd",
+        default=0,
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
+    )
+
+    Aij_minimum = models.FloatField(
+        default=0,
+        help_text="Məlumatın hesablanması üçün lazım olan minimum dəyər",
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
+    )
+
+    Aij_maximum = models.FloatField(
         help_text="Məlumatın hesablanması üçün lazım olan max dəyər",
-        default=0
+        default=0,
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
     )
 
     article = models.ForeignKey(
@@ -57,6 +75,24 @@ class Section(DateTimeModel, models.Model):
         blank=True,
         null=True,
         related_name="sections"
+    )
+
+    coefficient = models.FloatField(
+        help_text="Əmsal",
+        default=0,
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
+    )
+
+    sub_points = models.FloatField(
+        help_text="Altmeyarlar üzrə maksimum bal",
+        default=0,
+        validators=[
+            MaxValueValidator(limit_value=100),
+            MinValueValidator(0)
+        ]
     )
 
     def __str__(self) -> str:
