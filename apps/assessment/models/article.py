@@ -118,24 +118,32 @@ class Section(DateTimeModel, models.Model):
 
     def formula_min_max_min(self, Aij: float = 0) -> float:
         coefficient = self.sub_points * self.coefficient
-        formula = (Aij - self.Aij_minimum) / \
-            (self.Aij_maximum - self.Aij_minimum)
+        formula = (Aij - self.minimum) / \
+            (self.maximum - self.minimum)
 
         return coefficient * formula
 
     def formula_max_min_max(self, Aij: float = 0) -> float:
         coefficient = self.sub_points * self.coefficient
-        formula = (Aij - self.Aij_maximum) / \
-            (self.Aij_minimum - self.Aij_maximum)
+        formula = (Aij - self.maximum) / (self.minimum - self.maximum)
 
         return coefficient * formula
 
     def calculate(self, Aij: float = 0) -> float:
+
+        if self.minimum == self.maximum:
+            return 0
+
+        if Aij < self.Aij_minimum:
+            return 0
+
         formulas = {
             "formula_min_max_min": self.formula_min_max_min,
             "formula_max_min_max": self.formula_max_min_max,
         }
-        return formulas[self.formula](Aij=Aij)
+
+        result = formulas[self.formula](Aij=Aij)
+        return result if result > 0 else 0
 
     @property
     def number(self):

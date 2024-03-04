@@ -16,10 +16,11 @@ class CalculateKPI:
         fields_with_data = {}
 
         for point in points:
-            key = fields_mapping[point.section.number]
-            fields_with_data[key] = point.section.calculate(point.value)
+            key = fields_mapping.get(point.section.number, False)
+            if key:
+                fields_with_data[key] = point.section.calculate(point.value)
 
-        fields_with_data["period_year"] = self.assessment
+        fields_with_data["period_year"] = self.assessment.created_at.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
         fields_with_data["dost_center"] = self.assessment.center.name
 

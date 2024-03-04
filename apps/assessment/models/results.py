@@ -133,3 +133,6 @@ class DostKPIResult(models.Model):
 
     class Meta:
         unique_together = ["dost_center", "period_year", "period_quarter"]
+
+    def __str__(self) -> str:
+        return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
