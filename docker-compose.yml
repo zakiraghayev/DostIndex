@@ -58,7 +58,6 @@ services:
       - pgdb
       - redis
       - celery
-
   
   
 volumes:

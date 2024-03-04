@@ -98,6 +98,14 @@ DATABASES = {
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
         'HOST': os.environ.get("POSTGRES_HOST"),
         'PORT': os.environ.get("POSTGRES_PORT"),
+    },
+    'result': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get("POSTGRES_DB_RESULT"),
+        'USER': os.environ.get("POSTGRES_USER_RESULT"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD_RESULT"),
+        'HOST': os.environ.get("POSTGRES_HOST_RESULT"),
+        'PORT': os.environ.get("POSTGRES_PORT_RESULT"),
     }
 }
 
@@ -152,4 +160,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "user.User"
 
 # Import Admin settings
-JAZZMIN_SETTINGS
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
