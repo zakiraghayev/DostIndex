@@ -32,6 +32,8 @@ class Assessment(DateTimeModel, models.Model):
 
     class Meta:
         unique_together = ["quarter", "center"]
+        verbose_name = "Qiymətləndirmə"
+        verbose_name_plural = "Qiymətləndirmələr"
 
     def __str__(self) -> str:
         return f"{self.center}:  {self.quarter_str}"
@@ -69,6 +71,10 @@ class AssessmentPoint(DateTimeModel, models.Model):
             MinValueValidator(0)
         ]
     )
+
+    class Meta:
+        verbose_name = "Göstərici"
+        verbose_name_plural = "Göstəricilər"
 
     def __str__(self) -> str:
         return f"{self.section.article.code}. {self.section.article.title}"

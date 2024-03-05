@@ -17,6 +17,10 @@ class Article(DateTimeModel, models.Model):
         default="Liderlik."
     )
 
+    class Meta:
+        verbose_name = "KPİ Bloku"
+        verbose_name_plural = "KPİ Blokları"
+
     def __str__(self) -> str:
         return f"{self.code}. {self.title}"
 
@@ -112,6 +116,10 @@ class Section(DateTimeModel, models.Model):
         choices=FORMULAS,
         null=True
     )
+
+    class Meta:
+        verbose_name = "KPİ Göstərici"
+        verbose_name_plural = "KPİ Göstəriciləri"
 
     def __str__(self) -> str:
         return f"{self.article.code}.{self.code}.{self.title}"

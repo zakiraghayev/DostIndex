@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from apps.assessment.models import Assessment
 from apps.assessment.models import AssessmentPoint
 from apps.assessment.models import Section
+from apps.assessment.models import DostKPIResult
 from apps.todo.tasks import calculate_kpi_task
 
 
@@ -85,14 +86,28 @@ class AssessmentAdmin(admin.ModelAdmin):
             for section in missing_sections
         ])
 
-    def response_change(self, request, obj):
+    def response_change(self, request, obj: Assessment):
         if "_approve_and_calculate" in request.POST:
             # Handle approve logic here
+            dost_kpi_result = DostKPIResult.objects.filter(
+                dost_center=obj.center.name,
+                period_year=obj.created_at.year,
+                period_quarter=obj.quarter_str
+            ).first()
+            if dost_kpi_result:
+                self.message_user(
+                    request,
+                    f"{dost_kpi_result} mövcuddur.",
+                    level="WARNING"
+                )
+                return HttpResponseRedirect(".")
+
             calculate_kpi_task.delay(obj.id)
 
             self.message_user(
                 request,
-                "Uğurla təsdiqlənildi. Qısa zaman ərzində hesablama bitəcək. Nəticəni 'DostKPIResult' bölməsindən izləyə bilərsiniz."
+                "Uğurla təsdiqlənildi. Qısa zaman ərzində hesablama bitəcək. Nəticəni 'DostKPIResult' bölməsindən izləyə bilərsiniz.",
+                level="SUCCESS"
             )
             return HttpResponseRedirect(".")
 
