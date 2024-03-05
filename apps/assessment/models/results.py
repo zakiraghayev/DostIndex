@@ -136,3 +136,45 @@ class DostKPIResult(models.Model):
 
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
+
+
+class DostKPIResultExternal(models.Model):
+    dost_center = models.CharField(
+        default="Dost Mərkəzi #1",
+        help_text="Dost mərkəzinin adı",
+        max_length=64
+    )
+
+    period_year = models.PositiveIntegerField(
+        default=2024,
+        help_text="Dövr il",
+        verbose_name="Year of the Period"
+    )
+    period_quarter = models.CharField(
+        default="I rüb",
+        help_text="Dövr rüb",
+        verbose_name="Quarter of the Period"
+    )
+
+    requirements_compliance = models.FloatField(
+        help_text="5.1. Tələblərə görə icra",
+        default=0
+    )
+    it_infrastructure = models.FloatField(
+        help_text="5.2. İT infrastruktur",
+        default=0
+    )
+    communication = models.FloatField(
+        help_text="5.3. Kommunikasiya",
+        default=0,
+    )
+    back_office_satisfaction = models.FloatField(
+        help_text="5.4. Arxa ofislərdən məmnunluq",
+        default=0
+    )
+
+    class Meta:
+        unique_together = ["dost_center", "period_year", "period_quarter"]
+
+    def __str__(self) -> str:
+        return f"{self.dost_center}: {self.period_quarter} {self.period_year}"

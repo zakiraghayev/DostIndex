@@ -9,3 +9,4 @@ from apps.assessment.admin.assessment import AssessmentPoint
 from apps.assessment.admin.dost_center import DostCenter
 
 from apps.assessment.admin.result import DostKPIResult
+from apps.assessment.admin.result import DostKPIResultExternal
