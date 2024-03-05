@@ -12,5 +12,9 @@ class DostCenter(DateTimeModel, models.Model):
         default="DOST Mərkəzi #1"
     )
 
+    class Meta:
+        verbose_name = "Dost Mərkəzi"
+        verbose_name_plural = "Dost Mərkəzləri"
+
     def __str__(self) -> str:
         return self.name

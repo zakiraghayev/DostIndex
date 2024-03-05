@@ -16,7 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth.views import LogoutView
+from django.views.decorators.http import require_POST, require_GET
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+
+@require_GET
+def custom_logout(request):
+    logout(request)
+    return redirect('/admin')
+
 
 urlpatterns = [
+    path('admin/logout/', custom_logout, name='logout'),
     path('admin/', admin.site.urls),
 ]
