@@ -106,7 +106,7 @@ class AssessmentAdmin(admin.ModelAdmin):
 
             self.message_user(
                 request,
-                "Uğurla təsdiqlənildi. Qısa zaman ərzində hesablama bitəcək. Nəticəni 'DostKPIResult' bölməsindən izləyə bilərsiniz.",
+                "Uğurla təsdiqlənildi. Qısa zaman ərzində hesablama bitəcək.",
                 level="SUCCESS"
             )
             return HttpResponseRedirect(".")
