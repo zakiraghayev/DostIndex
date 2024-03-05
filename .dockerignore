@@ -1,0 +1,49 @@
+## Python Files ##
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+.pytest_cache
+
+## Django Files ##
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+media
+
+## Tests ##
+/tests/
+/*/tests/
+/htmlcov/
+.coverage
+.cache
+*.cover
+
+## Git ##
+.git
+.gitignore
+
+## Docker ##
+Dockerfile
+.dockerignore
+
+## Virtual Environment ##
+venv/
+.env
+*.env
+
+## IDE specific ##
+.idea/
+*.swp
+*.swo
+.vscode/
+*.sublime-workspace
+
+
+## Static Assets ##
+/static/
+/staticfiles/
+/media/
+/volumes/
