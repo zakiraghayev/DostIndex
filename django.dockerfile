@@ -1,7 +1,19 @@
-# Use the official Python image
+# Use the official Python image as the base image
 FROM python:3.12
+
+# Set an environment variable to ensure Python output is sent straight to the terminal without being buffered
 ENV PYTHONUNBUFFERED=1
+
+# Set the working directory inside the container
 WORKDIR /usr/src/app
-ADD . /usr/src/app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+
+# Copy only the requirements file, to cache the installed dependencies
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code to the container
+COPY . .
+
+
