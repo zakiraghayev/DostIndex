@@ -2,20 +2,24 @@ from typing import List
 from apps.assessment.models import Assessment
 from apps.assessment.models import AssessmentPoint
 from apps.assessment.models import DostKPIResult
+from apps.assessment.models import DostKPIResultExternal
 from apps.todo.config.celery import app
 
 
 class CalculateKPI:
     def __init__(self, assessment: Assessment):
         self.assessment = assessment
+        self.points: List[AssessmentPoint] = self.assessment.points.all()
 
     def run(self):
-        points: List[AssessmentPoint] = self.assessment.points.all()
-        fields_mapping = self.code_to_field_mapping()
+        self.calculate_main()
+        self.calculate_external()
 
+    def calculate_main(self):
+        fields_mapping = self.code_to_field_mapping()
         fields_with_data = {}
 
-        for point in points:
+        for point in self.points:
             key = fields_mapping.get(point.section.number, False)
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
@@ -25,6 +29,30 @@ class CalculateKPI:
         fields_with_data["dost_center"] = self.assessment.center.name
 
         DostKPIResult.objects.create(**fields_with_data)
+
+    def calculate_external(self):
+        fields_mapping = self.code_to_field_mapping_external()
+
+        fields_with_data = {}
+
+        for point in self.points:
+            key = fields_mapping.get(point.section.number, False)
+            if key:
+                fields_with_data[key] = point.section.calculate(point.value)
+
+        fields_with_data["period_year"] = self.assessment.created_at.year
+        fields_with_data["period_quarter"] = self.assessment.quarter_str
+        fields_with_data["dost_center"] = self.assessment.center.name
+
+        DostKPIResultExternal.objects.create(**fields_with_data)
+
+    def code_to_field_mapping_external(self):
+        return {
+            "5.1": "requirements_compliance",
+            "5.2": "it_infrastructure",
+            "5.3": "communication",
+            "5.4": "back_office_satisfaction",
+        }
 
     def code_to_field_mapping(self):
         """ from section code to Dost KPI Result table field """
