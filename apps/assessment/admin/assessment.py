@@ -87,7 +87,7 @@ class AssessmentAdmin(admin.ModelAdmin):
         ])
 
     def response_change(self, request, obj: Assessment):
-        if "_approve_and_calculate" in request.POST:
+        if "_approve_and_calculate" in request.POST and request.user.is_superuser:
             # Handle approve logic here
             dost_kpi_result = DostKPIResult.objects.filter(
                 dost_center=obj.center.name,

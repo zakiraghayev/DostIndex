@@ -5,6 +5,8 @@ window.addEventListener('load', function() {
 
     // Unused buttons on edit
     document?.querySelector('.add-row')?.remove();
+    document?.getElementsByName('_addanother')?.[0]?.remove();
+    document?.getElementsByName('_continue')?.[0]?.remove();
     document?.querySelectorAll('.related-widget-wrapper-link')?.forEach(element => element?.remove())
     
 });

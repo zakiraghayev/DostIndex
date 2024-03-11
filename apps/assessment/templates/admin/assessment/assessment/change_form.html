@@ -3,7 +3,9 @@
 
 {% block submit_buttons_bottom %}
 {{ block.super }}
+
+{% if request.user.is_superuser %}
 <br>
 <input type="submit" name="_approve_and_calculate" value="{% trans 'Təsdiqlə və Hesabla' %}" class="btn btn-success form-control" />
-
+{% endif %}
 {% endblock %}
