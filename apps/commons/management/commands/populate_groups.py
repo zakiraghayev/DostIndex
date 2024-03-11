@@ -18,8 +18,6 @@ class Command(BaseCommand):
                     "add_assessmentpoint",
                     "view_assessmentpoint",
                     "change_assessmentpoint",
-                    "view_dostkpiresult",
-                    "view_dostkpiresultexternal"
                 ]
             ),
 

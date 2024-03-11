@@ -13,8 +13,8 @@ class DostCenter(DateTimeModel, models.Model):
     )
 
     class Meta:
-        verbose_name = "Dost Mərkəzi"
-        verbose_name_plural = "Dost Mərkəzləri"
+        verbose_name = "DOST Mərkəzi"
+        verbose_name_plural = "DOST Mərkəzləri"
 
     def __str__(self) -> str:
         return self.name

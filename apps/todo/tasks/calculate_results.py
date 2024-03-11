@@ -24,7 +24,7 @@ class CalculateKPI:
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
 
-        fields_with_data["period_year"] = self.assessment.created_at.year
+        fields_with_data["period_year"] = self.assessment.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
         fields_with_data["dost_center"] = self.assessment.center.name
 
@@ -40,7 +40,7 @@ class CalculateKPI:
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
 
-        fields_with_data["period_year"] = self.assessment.created_at.year
+        fields_with_data["period_year"] = self.assessment.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
         fields_with_data["dost_center"] = self.assessment.center.name
 

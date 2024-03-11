@@ -133,8 +133,8 @@ class DostKPIResult(models.Model):
 
     class Meta:
         unique_together = ["dost_center", "period_year", "period_quarter"]
-        verbose_name = "Qiymətləndirmə Nəticəsi"
-        verbose_name_plural = "Qiymətləndirmə Nəticələri"
+        verbose_name = "Qiymətləndirmə Nəticəsi (Daxili)"
+        verbose_name_plural = "Qiymətləndirmə Nəticələri (Daxili)"
 
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
@@ -177,8 +177,8 @@ class DostKPIResultExternal(models.Model):
 
     class Meta:
         unique_together = ["dost_center", "period_year", "period_quarter"]
-        verbose_name = "Əlavə Qiymətləndirmə Nəticəsi"
-        verbose_name_plural = "Əlavə Qiymətləndirmə Nəticələri"
+        verbose_name = "Qiymətləndirmə Nəticəsi (Xarici)"
+        verbose_name_plural = "Qiymətləndirmə Nəticələri (Xarici)"
 
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"

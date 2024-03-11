@@ -23,6 +23,15 @@ class Assessment(DateTimeModel, models.Model):
         default="1"
     )
 
+    year = models.PositiveSmallIntegerField(
+        max_length=4,
+        default=2024,
+        validators=[
+            MinValueValidator(limit_value=1990),
+            MaxValueValidator(limit_value=2100)
+        ]
+    )
+
     center = models.ForeignKey(
         DostCenter,
         on_delete=models.SET_NULL,
@@ -32,11 +41,11 @@ class Assessment(DateTimeModel, models.Model):
 
     class Meta:
         unique_together = ["quarter", "center"]
-        verbose_name = "Qiymətləndirmə"
-        verbose_name_plural = "Qiymətləndirmələr"
+        verbose_name = "Qiymətləndirmə Anketi"
+        verbose_name_plural = "Qiymətləndirmə Anketləri"
 
     def __str__(self) -> str:
-        return f"{self.center}:  {self.quarter_str}"
+        return f"{self.center}:  {self.quarter_str}-{self.year}"
 
     @property
     def quarter_str(self):

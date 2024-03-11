@@ -91,7 +91,7 @@ class AssessmentAdmin(admin.ModelAdmin):
             # Handle approve logic here
             dost_kpi_result = DostKPIResult.objects.filter(
                 dost_center=obj.center.name,
-                period_year=obj.created_at.year,
+                period_year=obj.year,
                 period_quarter=obj.quarter_str
             ).first()
             if dost_kpi_result:

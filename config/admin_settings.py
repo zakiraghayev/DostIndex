@@ -24,7 +24,7 @@ JAZZMIN_SETTINGS = {
     # "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "DOST INDEX XOŞ GƏLMİŞSİNİZ.",
+    "welcome_sign": "DOST İNDEKS QİYMƏTLƏNDİRMƏ SİSTEMİ",
 
     # Copyright on the footer
     "copyright": "By Dost",
