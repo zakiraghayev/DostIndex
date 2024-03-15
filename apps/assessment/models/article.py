@@ -68,24 +68,6 @@ class Section(DateTimeModel, models.Model):
         ]
     )
 
-    Aij_minimum = models.FloatField(
-        default=1,
-        help_text="Məlumatın hesablanması üçün lazım olan minimum dəyər",
-        validators=[
-            MaxValueValidator(limit_value=100),
-            MinValueValidator(0)
-        ]
-    )
-
-    Aij_maximum = models.FloatField(
-        help_text="Məlumatın hesablanması üçün lazım olan max dəyər",
-        default=1,
-        validators=[
-            MaxValueValidator(limit_value=100),
-            MinValueValidator(0)
-        ]
-    )
-
     article = models.ForeignKey(
         Article,
         on_delete=models.DO_NOTHING,
@@ -140,9 +122,6 @@ class Section(DateTimeModel, models.Model):
     def calculate(self, Aij: float = 0) -> float:
 
         if self.minimum == self.maximum:
-            return 0
-
-        if Aij < self.Aij_minimum:
             return 0
 
         formulas = {
