@@ -104,8 +104,8 @@ article_2 = {
         {
             'code': 6,
             'title': 'Cavablandırılan şikayətlər',
-            'minimum': 90,
-            'maximum': 100,
+            'minimum': 0.9,
+            'maximum': 1,
             'coefficient': 2.5,
             'sub_points': 15,
             'formula': 'formula_min_max_min',

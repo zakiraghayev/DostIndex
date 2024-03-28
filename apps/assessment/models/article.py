@@ -102,22 +102,22 @@ class Section(DateTimeModel, models.Model):
     class Meta:
         verbose_name = "KPİ Göstərici"
         verbose_name_plural = "KPİ Göstəriciləri"
+        ordering = [ "article__code", "code" ]
 
     def __str__(self) -> str:
-        return f"{self.article.code}.{self.code}.{self.title}"
+        return f"{self.article.code}.{self.code} {self.title}"
 
     def formula_min_max_min(self, Aij: float = 0) -> float:
         coefficient = self.sub_points * self.coefficient
-        formula = (Aij - self.minimum) / \
-            (self.maximum - self.minimum)
-
-        return coefficient * formula
+        formula = (Aij - self.minimum) / (self.maximum - self.minimum)
+        # print(f"{self.number} {self.title} {formula} with {Aij}")
+        return round(coefficient * formula, 2)
 
     def formula_max_min_max(self, Aij: float = 0) -> float:
         coefficient = self.sub_points * self.coefficient
         formula = (Aij - self.maximum) / (self.minimum - self.maximum)
-
-        return coefficient * formula
+        # print(f"{self.number} {self.title} {formula} with {Aij}")
+        return round(coefficient * formula, 2)
 
     def calculate(self, Aij: float = 0) -> float:
 

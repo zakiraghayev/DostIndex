@@ -102,7 +102,7 @@ class AssessmentAdmin(admin.ModelAdmin):
                 )
                 return HttpResponseRedirect(".")
 
-            calculate_kpi_task.delay(obj.id)
+            calculate_kpi_task(obj.id)
 
             self.message_user(
                 request,

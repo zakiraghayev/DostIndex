@@ -24,7 +24,6 @@ class Assessment(DateTimeModel, models.Model):
     )
 
     year = models.PositiveSmallIntegerField(
-        max_length=4,
         default=2024,
         validators=[
             MinValueValidator(limit_value=1990),
