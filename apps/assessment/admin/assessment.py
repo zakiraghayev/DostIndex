@@ -39,6 +39,17 @@ class AssessmentPointInlineFormset(BaseInlineFormSet):
             ]
             self.extra = len(sections_grouped_by_article)
 
+    def get_queryset(self):
+        """
+        Ensure the queryset is ordered as required for both new and existing instances.
+        This method is called to populate the formset.
+        """
+        qs = super().get_queryset()
+        if self.instance.pk:  # Existing object
+            # Adjust the queryset to include your desired ordering
+            qs = qs.order_by('section__article__code', 'section__code')
+        return qs
+
 
 class AssessmentPointInline(admin.TabularInline):
     model = AssessmentPoint
@@ -102,7 +113,7 @@ class AssessmentAdmin(admin.ModelAdmin):
                 )
                 return HttpResponseRedirect(".")
 
-            calculate_kpi_task.delay(obj.id)
+            calculate_kpi_task(obj.id)
 
             self.message_user(
                 request,

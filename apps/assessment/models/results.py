@@ -5,130 +5,147 @@ class DostKPIResult(models.Model):
 
     dost_center = models.CharField(
         default="Dost Mərkəzi #1",
-        help_text="Dost mərkəzinin adı",
+        verbose_name="Dost mərkəzinin adı",
         max_length=64
     )
 
     period_year = models.PositiveIntegerField(
         default=2024,
-        help_text="Dövr il",
-        verbose_name="Year of the Period"
+        verbose_name="Dövr il",
     )
     period_quarter = models.CharField(
         default="I rüb",
-        help_text="Dövr rüb",
-        verbose_name="Quarter of the Period"
+        verbose_name="Dövr rüb",
     )
 
+    total = models.FloatField(
+        verbose_name="Ümumi",
+        default=0,
+        blank=True
+    )
     target_achievement = models.FloatField(
         default=0,
-        help_text="1.1. Hədəfə çatma",
-        verbose_name="Target Achievement"
+        verbose_name="1.1. Hədəfə çatma",
     )
     administrative_violations = models.FloatField(
         default=0,
-        help_text="1.2. İnzibati qayda pozuntuları",
-        verbose_name="Administrative Violations"
+        verbose_name="1.2. İnzibati qayda pozuntuları",
     )
     employee_satisfaction_with_leaders = models.FloatField(
         default=0,
-        help_text="1.3. İşçilərin rəhblərdən məmnunluğu",
-        verbose_name="Employee Satisfaction with Leaders"
+        verbose_name="1.3. İşçilərin rəhblərdən məmnunluğu",
     )
     citizen_reception = models.FloatField(
         default=0,
-        help_text="1.4. Vətəndaş qəbulu",
-        verbose_name="Citizen Reception"
+        verbose_name="1.4. Vətəndaş qəbulu",
+
     )
     corporate_culture = models.FloatField(
         default=0,
-        help_text="1.5. Korporativ mədəniyyət",
-        verbose_name="Corporate Culture"
+        verbose_name="1.5. Korporativ mədəniyyət",
+
+    )
+    total_article_1 = models.FloatField(
+        verbose_name="1. Ümumi - Liderlik",
+        default=0,
+        blank=True
     )
     citizen_satisfaction = models.FloatField(
         default=0,
-        help_text="2.1. Vətəndaş məmnunluğu",
-        verbose_name="Citizen Satisfaction"
+        verbose_name="2.1. Vətəndaş məmnunluğu",
     )
     average_waiting_time = models.FloatField(
         default=0,
-        help_text="2.2. Orta gözləmə müddəti",
-        verbose_name="Average Waiting Time"
+        verbose_name="2.2. Orta gözləmə müddəti",
     )
     average_service_time = models.FloatField(
         default=0,
-        help_text="2.3. Orta xidmət müddəti",
-        verbose_name="Average Service Time"
+        verbose_name="2.3. Orta xidmət müddəti",
+
     )
     satisfaction_with_essx = models.FloatField(
         default=0,
-        help_text="2.4. ESSX-dən məmnunluq",
-        verbose_name="Satisfaction with ESSX"
+        verbose_name="2.4. ESSX-dən məmnunluq",
+
     )
     substantial_complaints = models.FloatField(
         default=0,
-        help_text="2.5. Əsaslı şikayətlər",
-        verbose_name="Substantial Complaints"
+        verbose_name="2.5. Əsaslı şikayətlər",
+
     )
     complaints_answered = models.FloatField(
         default=0,
-        help_text="2.6. Cavablandırılan şikayətlər",
-        verbose_name="Complaints Answered"
+        verbose_name="2.6. Cavablandırılan şikayətlər",
+
     )
     on_site_response = models.FloatField(
         default=0,
-        help_text="2.7. Yerində cavablandırma",
-        verbose_name="On Site Response"
+        verbose_name="2.7. Yerində cavablandırma",
+    )
+    total_article_2 = models.FloatField(
+        verbose_name="2. Ümumi - Vətəndaşlar üçün nəticələr",
+        default=0,
+        blank=True
     )
     compliance_with_normative_documents = models.FloatField(
         default=0,
-        help_text="3.1. Xidmət proseslərinin normativ sənədlərə uyğunluğu",
-        verbose_name="Compliance with Normative Documents"
+        verbose_name="3.1. Xidmət proseslərinin normativ sənədlərə uyğunluğu",
+
     )
     repeat_visits = models.FloatField(
         default=0,
-        help_text="3.2. Təkrar müraciət",
-        verbose_name="Repeat Visits"
+        verbose_name="3.2. Təkrar müraciət",
+
     )
     back_office_denials = models.FloatField(
         default=0,
-        help_text="3.3. Arxa ofis imtinaları",
-        verbose_name="Back Office Denials"
+        verbose_name="3.3. Arxa ofis imtinaları",
+
     )
     delayed_documents = models.FloatField(
         default=0,
-        help_text="3.4. Gecikdirilmiş sənədlər",
-        verbose_name="Delayed Documents"
+        verbose_name="3.4. Gecikdirilmiş sənədlər",
+
     )
     volunteer_satisfaction = models.FloatField(
         default=0,
-        help_text="3.5. Könüllülərdən məmnunluq",
-        verbose_name="Volunteer Satisfaction"
+        verbose_name="3.5. Könüllülərdən məmnunluq",
+
     )
     resilience_to_risk = models.FloatField(
         default=0,
-        help_text="3.6. Riskə dayanıqlılıq",
-        verbose_name="Resilience to Risk"
+        verbose_name="3.6. Riskə dayanıqlılıq",
+
+    )
+    total_article_3 = models.FloatField(
+        verbose_name="3. Ümumi - Proseslər üzrə nəticələr",
+        default=0,
+        blank=True
     )
     employee_turnover = models.FloatField(
         default=0,
-        help_text="4.1. İşçi dövriyyəsi",
-        verbose_name="Employee Turnover"
+        verbose_name="4.1. İşçi dövriyyəsi",
+
     )
     employee_satisfaction = models.FloatField(
         default=0,
-        help_text="4.2. İşçilərin məmnunluğu",
-        verbose_name="Employee Satisfaction"
+        verbose_name="4.2. İşçilərin məmnunluğu",
+
     )
     exam_results = models.FloatField(
         default=0,
-        help_text="4.3. İmtahan nəticələri",
-        verbose_name="Exam Results"
+        verbose_name="4.3. İmtahan nəticələri",
+
     )
     sa_assessment = models.FloatField(
         default=0,
-        help_text="4.4. SA qiymətləndirilməsi",
-        verbose_name="SA Assessment"
+        verbose_name="4.4. SA qiymətləndirilməsi",
+
+    )
+    total_article_4 = models.FloatField(
+        verbose_name="4. Ümumi - İşçilər üçün nəticələr",
+        default=0,
+        blank=True
     )
 
     class Meta:
@@ -136,43 +153,106 @@ class DostKPIResult(models.Model):
         verbose_name = "Qiymətləndirmə Nəticəsi (Daxili)"
         verbose_name_plural = "Qiymətləndirmə Nəticələri (Daxili)"
 
+    def save(self, *args, **kwargs) -> None:
+        self.sum_article_1()
+        self.sum_article_2()
+        self.sum_article_3()
+        self.sum_article_4()
+        self.sum_total()
+        return super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
 
+    def sum_article_1(self):
+        self.total_article_1 = (
+            self.target_achievement + 
+            self.administrative_violations + 
+            self.employee_satisfaction_with_leaders + 
+            self.citizen_reception +
+            self.corporate_culture
+        )
+
+    def sum_article_2(self):
+        self.total_article_2 = (
+            self.citizen_satisfaction +
+            self.average_waiting_time +
+            self.average_service_time +
+            self.satisfaction_with_essx +
+            self.complaints_answered +
+            self.on_site_response
+        )
+
+    def sum_article_3(self):
+        self.total_article_3 = (
+            self.compliance_with_normative_documents +
+            self.repeat_visits +
+            self.back_office_denials +
+            self.delayed_documents +
+            self.volunteer_satisfaction +
+            self.resilience_to_risk
+        )
+
+    def sum_article_4(self):
+        self.total_article_4 = (
+            self.employee_turnover +
+            self.employee_satisfaction +
+            self.exam_results +
+            self.sa_assessment
+        )
+
+    def sum_total(self):
+        self.total = round(
+            (
+                self.total_article_1 +
+                self.total_article_2 +
+                self.total_article_3 +
+                self.total_article_4
+            ),
+            2
+        )
+
 
 class DostKPIResultExternal(models.Model):
+
     dost_center = models.CharField(
         default="Dost Mərkəzi #1",
-        help_text="Dost mərkəzinin adı",
+        verbose_name="Dost mərkəzinin adı",
         max_length=64
     )
 
     period_year = models.PositiveIntegerField(
         default=2024,
-        help_text="Dövr il",
-        verbose_name="Year of the Period"
+        verbose_name="Dövr il",
+
     )
     period_quarter = models.CharField(
         default="I rüb",
-        help_text="Dövr rüb",
-        verbose_name="Quarter of the Period"
+        verbose_name="Dövr rüb",
+
     )
 
     requirements_compliance = models.FloatField(
-        help_text="5.1. Tələblərə görə icra",
+        verbose_name="5.1. Tələblərə görə icra",
         default=0
     )
     it_infrastructure = models.FloatField(
-        help_text="5.2. İT infrastruktur",
+        verbose_name="5.2. İT infrastruktur",
         default=0
     )
     communication = models.FloatField(
-        help_text="5.3. Kommunikasiya",
+        verbose_name="5.3. Kommunikasiya",
         default=0,
     )
     back_office_satisfaction = models.FloatField(
-        help_text="5.4. Arxa ofislərdən məmnunluq",
+        verbose_name="5.4. Arxa ofislərdən məmnunluq",
         default=0
+    )
+
+    total = models.FloatField(
+        verbose_name="Ümumi",
+        default=0,
+        blank=True
     )
 
     class Meta:
@@ -182,3 +262,19 @@ class DostKPIResultExternal(models.Model):
 
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
+
+    def save(self, *args, **kwargs) -> None:
+
+        self.sum_total()
+        return super().save(*args, **kwargs)    
+
+    def sum_total(self):
+        self.total = round(
+            (
+                self.requirements_compliance +
+                self.it_infrastructure +
+                self.communication +
+                self.back_office_satisfaction
+            ),
+            2
+        )
