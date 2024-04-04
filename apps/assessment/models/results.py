@@ -179,6 +179,7 @@ class DostKPIResult(models.Model):
             self.average_waiting_time +
             self.average_service_time +
             self.satisfaction_with_essx +
+            self.substantial_complaints +
             self.complaints_answered +
             self.on_site_response
         )
