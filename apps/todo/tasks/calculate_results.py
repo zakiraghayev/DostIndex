@@ -10,41 +10,53 @@ class CalculateKPI:
     def __init__(self, assessment: Assessment):
         self.assessment = assessment
         self.points: List[AssessmentPoint] = self.assessment.points.all()
+        self.points: List[AssessmentPoint] = self.assessment.points.all()
 
     def run(self):
-        self.calculate_main()
-        self.calculate_external()
-
+        try:
+            self.calculate_main()
+            self.calculate_external()
+        except:
+            pass
+    
     def calculate_main(self):
         fields_mapping = self.code_to_field_mapping()
-        fields_with_data = {}
+        fields_with_data, unnamed_fields_with_data = {}, {}
 
-        for point in self.points:
+        for point in self.points.filter(section__external=False):
             key = fields_mapping.get(point.section.number, False)
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
+            else:
+                unnamed_fields_with_data[point.section.number] = point.section.calculate(point.value)
 
         fields_with_data["period_year"] = self.assessment.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
         fields_with_data["dost_center"] = self.assessment.center.name
 
-        DostKPIResult.objects.create(**fields_with_data)
+        dost_kpi_result = DostKPIResult.objects.create(**fields_with_data)
+        dost_kpi_result.additional_fields = unnamed_fields_with_data
+        dost_kpi_result.save()
 
     def calculate_external(self):
         fields_mapping = self.code_to_field_mapping_external()
 
-        fields_with_data = {}
+        fields_with_data, unnamed_fields_with_data = {}, {}
 
-        for point in self.points:
+        for point in self.points.filter(section__external=True):
             key = fields_mapping.get(point.section.number, False)
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
+            else:
+                unnamed_fields_with_data[point.section.number] = point.section.calculate(point.value)
 
         fields_with_data["period_year"] = self.assessment.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
         fields_with_data["dost_center"] = self.assessment.center.name
 
-        DostKPIResultExternal.objects.create(**fields_with_data)
+        dost_kpi_result_externale = DostKPIResultExternal.objects.create(**fields_with_data)
+        dost_kpi_result_externale.additional_fields = unnamed_fields_with_data
+        dost_kpi_result_externale.save()
 
     def code_to_field_mapping_external(self):
         return {

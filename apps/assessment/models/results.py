@@ -19,7 +19,7 @@ class DostKPIResult(models.Model):
     )
 
     total = models.FloatField(
-        verbose_name="Ümumi",
+        verbose_name="Yekun",
         default=0,
         blank=True
     )
@@ -46,7 +46,7 @@ class DostKPIResult(models.Model):
 
     )
     total_article_1 = models.FloatField(
-        verbose_name="1. Ümumi - Liderlik",
+        verbose_name="1. Yekun - Liderlik",
         default=0,
         blank=True
     )
@@ -83,7 +83,7 @@ class DostKPIResult(models.Model):
         verbose_name="2.7. Yerində cavablandırma",
     )
     total_article_2 = models.FloatField(
-        verbose_name="2. Ümumi - Vətəndaşlar üçün nəticələr",
+        verbose_name="2. Yekun - Vətəndaşlar üçün nəticələr",
         default=0,
         blank=True
     )
@@ -118,7 +118,7 @@ class DostKPIResult(models.Model):
 
     )
     total_article_3 = models.FloatField(
-        verbose_name="3. Ümumi - Proseslər üzrə nəticələr",
+        verbose_name="3. Yekun - Proseslər üzrə nəticələr",
         default=0,
         blank=True
     )
@@ -143,7 +143,14 @@ class DostKPIResult(models.Model):
 
     )
     total_article_4 = models.FloatField(
-        verbose_name="4. Ümumi - İşçilər üçün nəticələr",
+        verbose_name="4. Yekun - İşçilər üçün nəticələr",
+        default=0,
+        blank=True
+    )
+
+    additional_fields = models.JSONField(default=dict, blank=True, null=True)
+    total_article_unnamed = models.FloatField(
+        verbose_name="X. Yekun - Yeni maddələr",
         default=0,
         blank=True
     )
@@ -152,12 +159,14 @@ class DostKPIResult(models.Model):
         unique_together = ["dost_center", "period_year", "period_quarter"]
         verbose_name = "Qiymətləndirmə Nəticəsi (Daxili)"
         verbose_name_plural = "Qiymətləndirmə Nəticələri (Daxili)"
+        ordering = ["dost_center", "period_year", "period_quarter"]
 
     def save(self, *args, **kwargs) -> None:
         self.sum_article_1()
         self.sum_article_2()
         self.sum_article_3()
         self.sum_article_4()
+        self.sum_unnamed_fields()
         self.sum_total()
         return super().save(*args, **kwargs)
 
@@ -202,13 +211,18 @@ class DostKPIResult(models.Model):
             self.sa_assessment
         )
 
+    def sum_unnamed_fields(self):
+        additional_fields = list(self.additional_fields.values())
+        self.total_article_unnamed = sum(list(map(lambda i: round(float(i), 2), additional_fields)))
+
     def sum_total(self):
         self.total = round(
             (
                 self.total_article_1 +
                 self.total_article_2 +
                 self.total_article_3 +
-                self.total_article_4
+                self.total_article_4 +
+                self.total_article_unnamed
             ),
             2
         )
@@ -251,15 +265,18 @@ class DostKPIResultExternal(models.Model):
     )
 
     total = models.FloatField(
-        verbose_name="Ümumi",
+        verbose_name="Yekun",
         default=0,
         blank=True
     )
+
+    additional_fields = models.JSONField(default=dict, blank=True, null=True)
 
     class Meta:
         unique_together = ["dost_center", "period_year", "period_quarter"]
         verbose_name = "Qiymətləndirmə Nəticəsi (Xarici)"
         verbose_name_plural = "Qiymətləndirmə Nəticələri (Xarici)"
+        ordering = ["dost_center", "period_year", "period_quarter"]
 
     def __str__(self) -> str:
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
@@ -269,13 +286,19 @@ class DostKPIResultExternal(models.Model):
         self.sum_total()
         return super().save(*args, **kwargs)    
 
+    @property
+    def sum_unnamed_fields(self):
+        additional_fields = list(self.additional_fields.values())
+        return sum(list(map(lambda i: round(float(i), 2), additional_fields)))
+
     def sum_total(self):
         self.total = round(
             (
                 self.requirements_compliance +
                 self.it_infrastructure +
                 self.communication +
-                self.back_office_satisfaction
+                self.back_office_satisfaction +
+                self.sum_unnamed_fields
             ),
             2
         )

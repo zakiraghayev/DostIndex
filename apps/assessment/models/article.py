@@ -20,6 +20,7 @@ class Article(DateTimeModel, models.Model):
     class Meta:
         verbose_name = "KPİ Bloku"
         verbose_name_plural = "KPİ Blokları"
+        ordering = ["code"]
 
     def __str__(self) -> str:
         return f"{self.code}. {self.title}"
@@ -99,6 +100,8 @@ class Section(DateTimeModel, models.Model):
         null=True
     )
 
+    external = models.BooleanField(default=False)
+    
     class Meta:
         verbose_name = "KPİ Göstərici"
         verbose_name_plural = "KPİ Göstəriciləri"
