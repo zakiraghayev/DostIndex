@@ -1,5 +1,8 @@
+from typing import Any, Callable, Optional, Sequence, Union
+from django.http.request import HttpRequest
 from apps.assessment.models import DostKPIResult
 from apps.assessment.models import DostKPIResultExternal
+from collections import OrderedDict
 from django.contrib import admin
 from django.forms import ModelForm
 from django.utils.safestring import mark_safe
@@ -34,8 +37,9 @@ class DostKPIResultForm(ModelForm):
             'total_article_2': BoldNumberInput(),
             'total_article_3': BoldNumberInput(),
             'total_article_4': BoldNumberInput(),
+            'total_article_unnamed': BoldNumberInput(),
         }
-
+    
 
 class DostKPIResultExternalForm(ModelForm):
     class Meta:
@@ -49,6 +53,11 @@ class DostKPIResultExternalForm(ModelForm):
 class DostKPIResultAdmin(admin.ModelAdmin):
     form = DostKPIResultForm
 
+    class Media:
+        css = {
+            'all': ('admin/style-mine.css',)
+        }
+        
 
 class DostKPIResultExternalAdmin(admin.ModelAdmin):
     form = DostKPIResultExternalForm
