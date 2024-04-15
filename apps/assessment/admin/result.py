@@ -1,4 +1,6 @@
 from typing import Any, Callable, Optional, Sequence, Union
+from django.forms.fields import Field
+from django.forms.utils import ErrorList
 from django.http.request import HttpRequest
 from apps.assessment.models import DostKPIResult
 from apps.assessment.models import DostKPIResultExternal
@@ -28,6 +30,7 @@ class BoldNumberInput(forms.NumberInput):
 
 
 class DostKPIResultForm(ModelForm):
+
     class Meta:
         model = DostKPIResult
         fields = "__all__"
@@ -39,25 +42,6 @@ class DostKPIResultForm(ModelForm):
             'total_article_4': BoldNumberInput(),
             'total_article_unnamed': BoldNumberInput(),
         }
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        # Parse the JSON data from additionalfield
-        additionalfield_data = self.instance.additional_fields or {}
-        
-        # Dynamically add FloatField instances for each key-value pair
-        for key, value in additionalfield_data.items():
-            self.fields[key] = forms.FloatField(initial=value)
-
-
-class DostKPIResultExternalForm(ModelForm):
-    class Meta:
-        model = DostKPIResult
-        fields = "__all__"
-        widgets = {
-            'total': BoldNumberInput(),
-        }
 
 
 class DostKPIResultAdmin(admin.ModelAdmin):
@@ -68,6 +52,15 @@ class DostKPIResultAdmin(admin.ModelAdmin):
             'all': ('admin/style-mine.css',)
         }
         
+
+class DostKPIResultExternalForm(ModelForm):
+    class Meta:
+        model = DostKPIResult
+        fields = "__all__"
+        widgets = {
+            'total': BoldNumberInput(),
+        }
+
 
 class DostKPIResultExternalAdmin(admin.ModelAdmin):
     form = DostKPIResultExternalForm
