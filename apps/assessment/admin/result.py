@@ -40,6 +40,16 @@ class DostKPIResultForm(ModelForm):
             'total_article_unnamed': BoldNumberInput(),
         }
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        # Parse the JSON data from additionalfield
+        additionalfield_data = self.instance.additional_fields or {}
+        
+        # Dynamically add FloatField instances for each key-value pair
+        for key, value in additionalfield_data.items():
+            self.fields[key] = forms.FloatField(initial=value)
+
 
 class DostKPIResultExternalForm(ModelForm):
     class Meta:
