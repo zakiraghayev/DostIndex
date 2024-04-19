@@ -1,15 +1,9 @@
-from typing import Any, Callable, Optional, Sequence, Union
-from django.forms.fields import Field
-from django.forms.utils import ErrorList
-from django.http.request import HttpRequest
+
 from apps.assessment.models import DostKPIResult
 from apps.assessment.models import DostKPIResultExternal
-from collections import OrderedDict
+
 from django.contrib import admin
-from django.forms import ModelForm
 from django.utils.safestring import mark_safe
-
-
 from django import forms
 
 
@@ -29,7 +23,7 @@ class BoldNumberInput(forms.NumberInput):
         return mark_safe(f"<hr>{original_rendering}<hr style='border-bottom:2px solid lightgrey;'>")
 
 
-class DostKPIResultForm(ModelForm):
+class DostKPIResultForm(forms.ModelForm):
 
     class Meta:
         model = DostKPIResult
@@ -51,9 +45,10 @@ class DostKPIResultAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/style-mine.css',)
         }
-        
+        js = ('admin/additional_fields.js',)  # Path to your JavaScript file
 
-class DostKPIResultExternalForm(ModelForm):
+
+class DostKPIResultExternalForm(forms.ModelForm):
     class Meta:
         model = DostKPIResult
         fields = "__all__"

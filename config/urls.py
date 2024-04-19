@@ -31,4 +31,5 @@ def custom_logout(request):
 urlpatterns = [
     path('admin/logout/', custom_logout, name='logout'),
     path('admin/', admin.site.urls),
+    path('', admin.site.urls),
 ]

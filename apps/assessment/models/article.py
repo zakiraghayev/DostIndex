@@ -138,3 +138,7 @@ class Section(DateTimeModel, models.Model):
     @property
     def number(self):
         return f"{self.article.code}.{self.code}"
+
+    @property
+    def field_name(self):
+        return f"field_{self.article.code}_{self.code}"

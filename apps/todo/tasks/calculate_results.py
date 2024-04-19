@@ -28,7 +28,7 @@ class CalculateKPI:
             if key:
                 fields_with_data[key] = point.section.calculate(point.value)
             else:
-                unnamed_fields_with_data[point.section.number] = point.section.calculate(point.value)
+                unnamed_fields_with_data[point.section.field_name] = point.section.calculate(point.value)
 
         fields_with_data["period_year"] = self.assessment.year
         fields_with_data["period_quarter"] = self.assessment.quarter_str
