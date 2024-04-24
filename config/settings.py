@@ -30,7 +30,6 @@ DEBUG = os.environ.get("DEBUG", False) == "True"
 
 ALLOWED_HOSTS = [
     os.environ.get("ALLOWED_HOST"),
-    '192.168.1.143'
 ]
 
 
