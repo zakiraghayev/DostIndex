@@ -16,4 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of your application code to the container
 COPY . .
 
-
+# Create a non-root user and switch to it
+RUN adduser --disabled-password --gecos '' nonrootuser
+USER nonrootuser
