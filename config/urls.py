@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.contrib.auth.views import LogoutView
-from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.http import require_GET
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 @require_GET
@@ -33,3 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', admin.site.urls),
 ]
+
+urlpatterns += static(
+    settings.STATIC_URL,
+    document_root=settings.STATIC_ROOT
+)
