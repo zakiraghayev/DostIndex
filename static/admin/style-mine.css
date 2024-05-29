@@ -1,0 +1,10 @@
+/* Make the label text not bold */
+label.col-sm-3.text-left {
+    font-weight: normal; /* This will make the text not bold */
+    color: #333; /* This changes the label text color */
+}
+
+/* Make the label text bold when parent div has a class containing 'total' */
+div[class*="total"] > .row > label.col-sm-3.text-left {
+    font-weight: bold; /* This will make the text bold */
+}
