@@ -162,3 +162,8 @@ AUTH_USER_MODEL = "user.User"
 
 # Import Admin settings
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+
+CSRF_TRUSTED_ORIGINS = [
+    os.environ.get("CSRF_TRUSTED_ORIGINS", "http://localhost:8000"),
+    os.environ.get("CSRF_TRUSTED_ORIGINS_2", "http://localhost"),
+]
