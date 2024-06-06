@@ -20,7 +20,8 @@ class Assessment(DateTimeModel, models.Model):
     quarter = models.CharField(
         choices=QUARTERS,
         max_length=16,
-        default="1"
+        default="1",
+        verbose_name="Rüb"
     )
 
     year = models.PositiveSmallIntegerField(
@@ -28,14 +29,16 @@ class Assessment(DateTimeModel, models.Model):
         validators=[
             MinValueValidator(limit_value=1990),
             MaxValueValidator(limit_value=2100)
-        ]
+        ],
+        verbose_name="İl"
     )
 
     center = models.ForeignKey(
         DostCenter,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="assessments"
+        related_name="assessments",
+        verbose_name="Mərkəz"
     )
 
     class Meta:
@@ -61,14 +64,16 @@ class AssessmentPoint(DateTimeModel, models.Model):
         Section,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="points"
+        related_name="points",
+        verbose_name="KPİ Göstərici"
     )
 
     assessment = models.ForeignKey(
         Assessment,
         on_delete=models.SET_NULL,
         null=True,
-        related_name="points"
+        related_name="points",
+        verbose_name="Anket"
     )
 
     value = models.FloatField(

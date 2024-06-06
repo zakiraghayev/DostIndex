@@ -47,3 +47,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+    class Meta:
+        verbose_name = "İstifadəçi"
+        verbose_name_plural = "İstifadəçilər"

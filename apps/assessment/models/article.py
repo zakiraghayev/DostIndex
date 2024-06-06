@@ -57,7 +57,8 @@ class Section(DateTimeModel, models.Model):
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
-        ]
+        ],
+        verbose_name="Aj maksimum qiyməti"
     )
 
     minimum = models.FloatField(
@@ -66,7 +67,8 @@ class Section(DateTimeModel, models.Model):
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
-        ]
+        ],
+        verbose_name="Aj minimum qiyməti"
     )
 
     article = models.ForeignKey(
@@ -74,11 +76,12 @@ class Section(DateTimeModel, models.Model):
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,
-        related_name="sections"
+        related_name="sections",
+        verbose_name="Blok"
     )
 
     coefficient = models.FloatField(
-        help_text="Əmsal",
+        verbose_name="Əmsal",
         default=1,
         validators=[
             MaxValueValidator(limit_value=100),
@@ -87,17 +90,18 @@ class Section(DateTimeModel, models.Model):
     )
 
     sub_points = models.FloatField(
-        help_text="Altmeyarlar üzrə maksimum bal",
         default=1,
         validators=[
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
-        ]
+        ],
+        verbose_name="Altmeyar üzrə maksimum bal"
     )
 
     formula = models.CharField(
         choices=FORMULAS,
-        null=True
+        null=True,
+        verbose_name="Düstur"
     )
 
     external = models.BooleanField(default=False)
