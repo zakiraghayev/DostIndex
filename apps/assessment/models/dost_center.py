@@ -7,7 +7,7 @@ from apps.commons.models import DateTimeModel
 
 class DostCenter(DateTimeModel, models.Model):
     name = models.CharField(
-        verbose_name="Dost mərkəzinin adı",
+        verbose_name="DOST mərkəzinin adı",
         max_length=128,
         default="DOST Mərkəzi #1"
     )

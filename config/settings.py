@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -142,7 +143,6 @@ USE_TZ = True
 
 LANGUAGES = [
     ("az", "Azerbaijan"),
-    ("en", "English"),
 
 ]
 
@@ -166,4 +166,8 @@ JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 CSRF_TRUSTED_ORIGINS = [
     os.environ.get("CSRF_TRUSTED_ORIGINS", "http://localhost:8000"),
     os.environ.get("CSRF_TRUSTED_ORIGINS_2", "http://localhost"),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'apps/locale'),
 ]

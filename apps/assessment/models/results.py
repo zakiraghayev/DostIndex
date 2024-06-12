@@ -5,17 +5,17 @@ class DostKPIResult(models.Model):
 
     dost_center = models.CharField(
         default="Dost Mərkəzi #1",
-        verbose_name="Dost mərkəzinin adı",
+        verbose_name="DOST mərkəzinin adı",
         max_length=64
     )
 
     period_year = models.PositiveIntegerField(
         default=2024,
-        verbose_name="Dövr il",
+        verbose_name="İl",
     )
     period_quarter = models.CharField(
         default="I rüb",
-        verbose_name="Dövr rüb",
+        verbose_name="Rüb",
     )
 
     total = models.FloatField(

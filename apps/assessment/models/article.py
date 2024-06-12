@@ -7,7 +7,7 @@ from apps.commons.models import DateTimeModel
 
 class Article(DateTimeModel, models.Model):
     code = models.CharField(
-        verbose_name="Kod nömrəsi",
+        verbose_name="Blok nömrəsi",
         max_length=5,
         default="1"
     )
@@ -18,8 +18,8 @@ class Article(DateTimeModel, models.Model):
     )
 
     class Meta:
-        verbose_name = "KPİ Bloku"
-        verbose_name_plural = "KPİ Blokları"
+        verbose_name = "Başlıca Performans Göstərici Bloku"
+        verbose_name_plural = "Başlıca Performans Göstərici Blokları"
         ordering = ["code"]
 
     def __str__(self) -> str:
@@ -42,12 +42,12 @@ class Section(DateTimeModel, models.Model):
     )
 
     code = models.CharField(
-        verbose_name="Kod nömrəsi",
+        verbose_name="Blok nömrəsi",
         max_length=5,
         default="1"
     )
     title = models.CharField(
-        verbose_name="Göstərici - KPİ adı",
+        verbose_name="Göstərici adı",
         max_length=64,
         default="Hədəfə çatma"
     )
@@ -58,7 +58,7 @@ class Section(DateTimeModel, models.Model):
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
         ],
-        verbose_name="Aj maksimum qiyməti"
+        verbose_name="Yuxarı sərhəd"
     )
 
     minimum = models.FloatField(
@@ -68,7 +68,7 @@ class Section(DateTimeModel, models.Model):
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
         ],
-        verbose_name="Aj minimum qiyməti"
+        verbose_name="Aşağı sərhəd"
     )
 
     article = models.ForeignKey(
@@ -77,11 +77,11 @@ class Section(DateTimeModel, models.Model):
         blank=True,
         null=True,
         related_name="sections",
-        verbose_name="Blok"
+        verbose_name="Blok adı"
     )
 
     coefficient = models.FloatField(
-        verbose_name="Əmsal",
+        verbose_name="Blok əmsalı",
         default=1,
         validators=[
             MaxValueValidator(limit_value=100),
@@ -95,7 +95,7 @@ class Section(DateTimeModel, models.Model):
             MaxValueValidator(limit_value=100),
             MinValueValidator(0)
         ],
-        verbose_name="Altmeyar üzrə maksimum bal"
+        verbose_name="İndiqator əmsalı"
     )
 
     formula = models.CharField(
@@ -104,11 +104,11 @@ class Section(DateTimeModel, models.Model):
         verbose_name="Düstur"
     )
 
-    external = models.BooleanField(default=False)
+    external = models.BooleanField(default=False, verbose_name="Xarici")
     
     class Meta:
-        verbose_name = "KPİ Göstərici"
-        verbose_name_plural = "KPİ Göstəriciləri"
+        verbose_name = "Başlıca Performans Göstərici"
+        verbose_name_plural = "Başlıca Performans Göstəriciləri"
         ordering = [ "article__code", "code" ]
 
     def __str__(self) -> str:
