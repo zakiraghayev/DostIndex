@@ -65,7 +65,7 @@ class AssessmentPoint(DateTimeModel, models.Model):
         on_delete=models.SET_NULL,
         null=True,
         related_name="points",
-        verbose_name="KPİ Göstərici"
+        verbose_name="Başlıca Performans Göstərici"
     )
 
     assessment = models.ForeignKey(

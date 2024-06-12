@@ -7,6 +7,9 @@ ENV PYTHONUNBUFFERED=1
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
+# Install gettext for message translation
+RUN apt-get update && apt-get install -y gettext
+
 # Copy only the requirements file, to cache the installed dependencies
 COPY requirements.txt .
 
@@ -18,4 +21,5 @@ COPY . .
 
 # Create a non-root user and switch to it
 RUN adduser --disabled-password --gecos '' nonrootuser
+
 USER nonrootuser
