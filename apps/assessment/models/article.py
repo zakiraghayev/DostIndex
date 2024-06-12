@@ -18,8 +18,8 @@ class Article(DateTimeModel, models.Model):
     )
 
     class Meta:
-        verbose_name = "Başlıca Performans Göstərici (KPİ) Bloku"
-        verbose_name_plural = "Başlıca Performans Göstərici (KPİ) Blokları"
+        verbose_name = "Başlıca Performans Göstərici (KPI) Bloku"
+        verbose_name_plural = "Başlıca Performans Göstərici (KPI) Blokları"
         ordering = ["code"]
 
     def __str__(self) -> str:
@@ -107,8 +107,8 @@ class Section(DateTimeModel, models.Model):
     external = models.BooleanField(default=False, verbose_name="Xarici")
     
     class Meta:
-        verbose_name = "Başlıca Performans Göstərici (KPİ)"
-        verbose_name_plural = "Başlıca Performans Göstəriciləri (KPİ)"
+        verbose_name = "Başlıca Performans Göstərici (KPI)"
+        verbose_name_plural = "Başlıca Performans Göstəriciləri (KPI)"
         ordering = [ "article__code", "code" ]
 
     def __str__(self) -> str:

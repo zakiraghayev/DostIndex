@@ -730,3 +730,24 @@ msgstr "Hazırda:"
 
 msgid "Change:"
 msgstr "Dəyişdir:"
+
+msgid "Can add '%(word)'"
+msgstr "'%(word)s' əlavə edə bilər"
+
+msgid "Can change '%(word)'"
+msgstr "'%(word)s' dəyişə bilər"
+
+msgid "Can delete '%(word)'"
+msgstr "'%(word)s' silə bilər"
+
+msgid "Can view '%(word)'"
+msgstr "'%(word)s' görə bilər"
+
+msgid "Can add"
+msgstr "Əlavə edə bilər"
+
+msgid "Can change"
+msgstr "Dəyişdirə bilər"
+
+msgid "Can delete"
+msgstr "Silmək olar"
