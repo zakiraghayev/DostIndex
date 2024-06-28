@@ -174,46 +174,63 @@ class DostKPIResult(models.Model):
         return f"{self.dost_center}: {self.period_quarter} {self.period_year}"
 
     def sum_article_1(self):
-        self.total_article_1 = (
-            self.target_achievement + 
-            self.administrative_violations + 
-            self.employee_satisfaction_with_leaders + 
-            self.citizen_reception +
-            self.corporate_culture
+        self.total_article_1 = round(
+            (
+                self.target_achievement +
+                self.administrative_violations +
+                self.employee_satisfaction_with_leaders +
+                self.citizen_reception +
+                self.corporate_culture
+            ),
+            2
         )
 
     def sum_article_2(self):
-        self.total_article_2 = (
-            self.citizen_satisfaction +
-            self.average_waiting_time +
-            self.average_service_time +
-            self.satisfaction_with_essx +
-            self.substantial_complaints +
-            self.complaints_answered +
-            self.on_site_response
+        self.total_article_2 = round(
+            (
+                self.citizen_satisfaction +
+                self.average_waiting_time +
+                self.average_service_time +
+                self.satisfaction_with_essx +
+                self.substantial_complaints +
+                self.complaints_answered +
+                self.on_site_response
+            ),
+            2
         )
 
     def sum_article_3(self):
-        self.total_article_3 = (
-            self.compliance_with_normative_documents +
-            self.repeat_visits +
-            self.back_office_denials +
-            self.delayed_documents +
-            self.volunteer_satisfaction +
-            self.resilience_to_risk
+        self.total_article_3 = round(
+            (
+                self.compliance_with_normative_documents +
+                self.repeat_visits +
+                self.back_office_denials +
+                self.delayed_documents +
+                self.volunteer_satisfaction +
+                self.resilience_to_risk
+            ), 2
         )
 
     def sum_article_4(self):
-        self.total_article_4 = (
-            self.employee_turnover +
-            self.employee_satisfaction +
-            self.exam_results +
-            self.sa_assessment
+        self.total_article_4 = round(
+            (
+                self.employee_turnover +
+                self.employee_satisfaction +
+                self.exam_results +
+                self.sa_assessment
+            ), 2
         )
 
     def sum_unnamed_fields(self):
         additional_fields = list(self.additional_fields.values())
-        self.total_article_unnamed = sum(list(map(lambda i: round(float(i), 2), additional_fields)))
+        self.total_article_unnamed = sum(
+            list(
+                map(
+                    lambda i: round(float(i), 2),
+                    additional_fields
+                )
+            )
+        )
 
     def sum_total(self):
         self.total = round(
@@ -284,7 +301,7 @@ class DostKPIResultExternal(models.Model):
     def save(self, *args, **kwargs) -> None:
 
         self.sum_total()
-        return super().save(*args, **kwargs)    
+        return super().save(*args, **kwargs)
 
     @property
     def sum_unnamed_fields(self):
