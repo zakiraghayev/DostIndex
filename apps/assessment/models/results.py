@@ -224,7 +224,13 @@ class DostKPIResult(models.Model):
     def sum_unnamed_fields(self):
         additional_fields = list(self.additional_fields.values())
         self.total_article_unnamed = sum(
-            list(map(lambda i: round(float(i), 2), additional_fields)))
+            list(
+                map(
+                    lambda i: round(float(i), 2),
+                    additional_fields
+                )
+            )
+        )
 
     def sum_total(self):
         self.total = round(

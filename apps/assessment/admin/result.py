@@ -19,6 +19,7 @@ class BoldNumberInput(forms.NumberInput):
         self.attrs = attrs
 
     def render(self, name, value, attrs=None, renderer=None):
+        value = f"{value:.2f}" if value is not None else value
         original_rendering = super().render(name, value, self.attrs, renderer)
         return mark_safe(f"<hr>{original_rendering}<hr style='border-bottom:2px solid lightgrey;'>")
 
