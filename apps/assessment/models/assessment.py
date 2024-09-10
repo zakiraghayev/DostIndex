@@ -42,7 +42,7 @@ class Assessment(DateTimeModel, models.Model):
     )
 
     class Meta:
-        unique_together = ["quarter", "center"]
+        unique_together = ["quarter", "center", "year",]
         verbose_name = "Qiymətləndirmə Anketi"
         verbose_name_plural = "Qiymətləndirmə Anketləri"
 
@@ -80,7 +80,6 @@ class AssessmentPoint(DateTimeModel, models.Model):
         verbose_name="Göstərici dəyəri",
         default=0,
         validators=[
-            MaxValueValidator(limit_value=100),
             MinValueValidator(0)
         ]
     )

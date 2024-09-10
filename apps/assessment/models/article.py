@@ -1,4 +1,3 @@
-from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
 from django.db import models
 
@@ -55,7 +54,6 @@ class Section(DateTimeModel, models.Model):
         help_text="Aj üçün mümkün yuxarı sərhədd",
         default=1,
         validators=[
-            MaxValueValidator(limit_value=100),
             MinValueValidator(0)
         ],
         verbose_name="Yuxarı sərhəd"
@@ -65,7 +63,7 @@ class Section(DateTimeModel, models.Model):
         help_text="Aj üçün mümkün aşağı sərhədd",
         default=1,
         validators=[
-            MaxValueValidator(limit_value=100),
+            
             MinValueValidator(0)
         ],
         verbose_name="Aşağı sərhəd"
@@ -84,7 +82,7 @@ class Section(DateTimeModel, models.Model):
         verbose_name="Blok əmsalı",
         default=1,
         validators=[
-            MaxValueValidator(limit_value=100),
+            
             MinValueValidator(0)
         ]
     )
@@ -92,7 +90,7 @@ class Section(DateTimeModel, models.Model):
     sub_points = models.FloatField(
         default=1,
         validators=[
-            MaxValueValidator(limit_value=100),
+            
             MinValueValidator(0)
         ],
         verbose_name="İndiqator əmsalı"
